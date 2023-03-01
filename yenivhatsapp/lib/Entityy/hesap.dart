@@ -26,7 +26,7 @@ class _HesapState extends State<Hesap> with SingleTickerProviderStateMixin {
   String txt="";
   bool ask=true;
   bool ask1=true;
-Icon icon=Icon(Icons.mood_outlined,color: Colors.greenAccent,size: 50,);
+  Icon icon=Icon(Icons.mood_outlined,color: Colors.greenAccent,size: 50,);
   Icon icon2=Icon(Icons.mood_bad,color: Colors.red,size: 50,);
 
   int counter = 0;
@@ -37,8 +37,8 @@ Icon icon=Icon(Icons.mood_outlined,color: Colors.greenAccent,size: 50,);
   Color colors = Colors.blue;
   bool showmessage = true;
   String Time=DateTime.now().toString();
-List<String>time=[];
-List<String>tutar=[];
+  List<String>time=[];
+  List<String>tutar=[];
   @override
   void initState() {
     // TODO: implement initState
@@ -83,7 +83,7 @@ List<String>tutar=[];
             text: ("Vade hesabı"),
           ),
           Tab(
-            text: ("Değerlendirme ve yardım"),
+            text: ("Kampanyalar"),
           )
         ]),
       ),
@@ -164,7 +164,7 @@ List<String>tutar=[];
                     name.text.toString().trim(),
                     mail.text.toString().trim(),
                     pass.text.toString().trim(),
-                   time,tutar).catchError((dynamic error)
+                    time,tutar).catchError((dynamic error)
                 {
                   showDialog(context:context, builder: (context) {
 
@@ -177,7 +177,7 @@ List<String>tutar=[];
                           });
                           Navigator.pop(context);
 
-                          }, child: Text("TAMAM"))
+                        }, child: Text("TAMAM"))
                       ],
                     );
                   },);
@@ -293,10 +293,10 @@ List<String>tutar=[];
                       _authService
                           .signIn(pass.text.trim(), name.text.trim())
                           .then((value) => (Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      AnaSayfa(pass.text.toString())))));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AnaSayfa(pass.text.toString())))));
 
                       String bakiye;
                       Map<String, dynamic> map = {
@@ -310,7 +310,7 @@ List<String>tutar=[];
                   child: GestureDetector(
                     child: Text("şifremi unuttum?",
                         style:
-                            TextStyle(color: Colors.cyanAccent, fontSize: 20)),
+                        TextStyle(color: Colors.cyanAccent, fontSize: 20)),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -332,7 +332,7 @@ List<String>tutar=[];
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference ana = firestore.collection("onur");
     DocumentReference ref =
-        firestore.collection("onur").doc((_authService.uId().toString()));
+    firestore.collection("onur").doc((_authService.uId().toString()));
     setState(() {
       ref.update({"ID": _authService.uId()});
       print(_authService.uId().toString());
@@ -340,60 +340,73 @@ List<String>tutar=[];
   }
 
   Myimage() {
-    List <ListTile>liste=[ListTile(
-      tileColor: color3,
-      title: Text("iletişim bilgileri;0541 573 45 72",style: TextStyle(color: Colors.black,fontSize: 19)),
-      trailing: Image.asset("assets/icon/onur00.jpg"),
-      onTap: () {
-        setState(() {
-          print("$t3");
+    List <ListTile>liste=[
+      ListTile(
+        tileColor: Colors.white,
+        title: Text("Hemen Üye olun anında 50TL hediye",style: TextStyle(color: Colors.black,fontSize: 19)),
+        trailing: Icon(Icons.attach_money),
+        onTap: () {
+          setState(() {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn(),));
 
-          t3++;
-          if (t3 % 2 == 0)
-            color3 = Colors.white;
-          else {
-            color3 = Colors.black;
-          }
-        });
-      },
-    ),ListTile(
-      tileColor: color2,
-      title: Text("Proje sahibi :ONUR KARAYILAN",style: TextStyle(color: Colors.black,fontSize: 19)),
-      trailing: Image.asset("assets/images/onur00.jpg"),
-      onTap: () {
-        setState(() {
-          print("$t2");
 
-          t2++;
-          if (t2 % 2 == 0)
-            color2= Colors.white;
-          else {
-            color2 = Colors.black;
-          }
-        });
-      },
-    ),ListTile(
-      tileColor: color3,
-      title: Text(txt1,style: TextStyle(color: color4,fontSize: 19)),
-      trailing: Image.asset("assets/images/onur00.jpg"),
-      onTap: () {
-        setState(() {
-          print("$t3");
+          });
+        },
+      ),
+      ListTile(
+        tileColor: color3,
+        title: Text("iletişim bilgileri;0541 573 45 72",style: TextStyle(color: Colors.black,fontSize: 19)),
+        trailing: Image.asset("assets/images/onur00.jpg"),
+        onTap: () {
+          setState(() {
+            print("$t3");
 
-          t3++;
-          if (t3 % 2 == 0){
-            color3 = Colors.white;
-          color4=Colors.black;
-          txt1="iletişim bilgileri:05415734572";
-          }
-          else {
-            color3 = Colors.black;
-            color4=Colors.white;
-            txt1="TIKLAYARAK İLETİŞİM BİLGİLERİNE ULAŞABİLİRSİNİZ";
-          }
-        });
-      },
-    )];
+            t3++;
+            if (t3 % 2 == 0)
+              color3 = Colors.white;
+            else {
+              color3 = Colors.black;
+            }
+          });
+        },
+      ),ListTile(
+        tileColor: color2,
+        title: Text("Proje sahibi :ONUR KARAYILAN",style: TextStyle(color: Colors.black,fontSize: 19)),
+        trailing: Image.asset("assets/images/onur00.jpg"),
+        onTap: () {
+          setState(() {
+            print("$t2");
+
+            t2++;
+            if (t2 % 2 == 0)
+              color2= Colors.white;
+            else {
+              color2 = Colors.black;
+            }
+          });
+        },
+      ),ListTile(
+        tileColor: color3,
+        title: Text(txt1,style: TextStyle(color: color4,fontSize: 19)),
+        trailing: Image.asset("assets/images/onur00.jpg"),
+        onTap: () {
+          setState(() {
+            print("$t3");
+
+            t3++;
+            if (t3 % 2 == 0){
+              color3 = Colors.white;
+              color4=Colors.black;
+              txt1="iletişim bilgileri:05415734572";
+            }
+            else {
+              color3 = Colors.black;
+              color4=Colors.white;
+              txt1="TIKLAYARAK İLETİŞİM BİLGİLERİNE ULAŞABİLİRSİNİZ";
+            }
+          });
+        },
+      )];
 
     return Scaffold(backgroundColor: Colors.white,
       body: Column(mainAxisSize: MainAxisSize.max,crossAxisAlignment: CrossAxisAlignment.stretch,mainAxisAlignment: MainAxisAlignment.start,
@@ -404,7 +417,7 @@ List<String>tutar=[];
                 return liste[index];
               },),
             ),
-           ),
+          ),
           Expanded(
             child: Container(color: Colors.black,
               child: Slider(min: 0,max: 5,label: t.toString(),value: t, onChanged: (value) {
@@ -414,19 +427,19 @@ List<String>tutar=[];
                 });
               },),
             ),
-           ),
-        Expanded(
-          child: Column(
-            children: [
-              Container(color: Colors.black,child:
-                t>=3?icon:icon2,),
-         SizedBox(height: 10,),
-           Container(color: Colors.black,
-           child: t<=3?Text("Yanıtınız içi teşekkürler:).",style: TextStyle(color: Colors.cyanAccent,fontSize: 22),):Text("bizi tercih ettiğiniz için  teşekkürler:)",style: TextStyle(fontSize: 22,color: Colors.greenAccent)),)
-            ],
           ),
+          Expanded(
+            child: Column(
+              children: [
+                Container(color: Colors.black,child:
+                t>=3?icon:icon2,),
+                SizedBox(height: 10,),
+                Container(color: Colors.black,
+                  child: t<=3?Text("Yanıtınız için teşekkürler:).",style: TextStyle(color: Colors.cyanAccent,fontSize: 22),):Text("bizi tercih ettiğiniz için  teşekkürler:)",style: TextStyle(fontSize: 22,color: Colors.greenAccent)),)
+              ],
+            ),
 
-        )
+          )
 
 
         ],
